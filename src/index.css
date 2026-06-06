@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Compensa la navbar fissa quando si naviga alle ancore */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-background text-ink font-sans antialiased;
+    letter-spacing: -0.01em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+@layer utilities {
+  /* Forme organiche per le immagini: morbide su mobile, "blob" asimmetrico da tablet in su. */
+  .organic,
+  .organic-alt {
+    transition: border-radius 0.6s ease;
+  }
+
+  .organic {
+    border-radius: 1.75rem;
+  }
+
+  .organic-alt {
+    border-radius: 1.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .organic {
+      border-radius: 44% 56% 57% 43% / 50% 45% 55% 50%;
+    }
+
+    .organic-alt {
+      border-radius: 57% 43% 44% 56% / 46% 53% 47% 54%;
+    }
+  }
+
+  /* Animazione fade-in attivata via IntersectionObserver (classe .is-visible) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.7s ease-out,
+      transform 0.7s ease-out;
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}
