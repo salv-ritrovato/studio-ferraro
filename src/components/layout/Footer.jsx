@@ -108,7 +108,7 @@ function Footer() {
       <div className="border-t border-white/10">
         <div className="container flex flex-col items-center justify-between gap-3 py-6 text-xs text-slate-400 sm:flex-row">
           <p>© {new Date().getFullYear()} Studio Dentistico Ferraro. Tutti i diritti riservati.</p>
-          <p>P.IVA 01234567890 · Dir. San. Dr. Marco Rossi</p>
+          <p>P.IVA 012345678908 · Dir. San. Dr. Alberto Ferraro</p>
         </div>
       </div>
     </footer>
