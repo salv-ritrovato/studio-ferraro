@@ -64,6 +64,14 @@ function Navbar() {
     return () => observer.disconnect()
   }, [])
 
+  // Blocca lo scroll della pagina quando il menu full-screen è aperto.
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
+
   const closeMenu = () => setMenuOpen(false)
 
   return (
@@ -99,7 +107,7 @@ function Navbar() {
       </div>
 
       <nav
-        className="container flex h-20 items-center justify-between py-4"
+        className="container relative z-50 flex h-20 items-center justify-between py-4"
         aria-label="Navigazione principale"
       >
         <Logo />
@@ -153,34 +161,37 @@ function Navbar() {
 
       <div
         id="mobile-menu"
-        className={`overflow-hidden border-t border-slate-100 bg-white transition-[max-height] duration-300 ease-in-out lg:hidden ${
-          menuOpen ? 'max-h-96' : 'max-h-0'
+        className={`fixed inset-0 z-40 bg-white transition-opacity duration-300 lg:hidden ${
+          menuOpen ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
       >
-        <ul className="container flex flex-col gap-1 py-4">
-          {NAV_LINKS.map((link) => {
-            const isActive = activeId === link.href.slice(1)
-            return (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={closeMenu}
-                  aria-current={isActive ? 'page' : undefined}
-                  className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-primary/5 hover:text-primary ${
-                    isActive ? 'bg-primary/5 text-primary' : 'text-slate-700'
-                  }`}
-                >
-                  {link.label}
-                </a>
-              </li>
-            )
-          })}
-          <li className="mt-2">
-            <CalendlyButton variant="primary" onClick={closeMenu} className="w-full">
-              Prenota una visita
-            </CalendlyButton>
-          </li>
-        </ul>
+        <nav
+          className="flex h-full flex-col items-center justify-center gap-8 px-6"
+          aria-label="Menu mobile"
+        >
+          <ul className="flex flex-col items-center gap-6">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeId === link.href.slice(1)
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={closeMenu}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`font-display text-2xl font-semibold transition-colors ${
+                      isActive ? 'text-primary' : 'text-ink hover:text-primary'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+          <CalendlyButton variant="primary" onClick={closeMenu} className="mt-2">
+            Prenota una visita
+          </CalendlyButton>
+        </nav>
       </div>
     </header>
   )
