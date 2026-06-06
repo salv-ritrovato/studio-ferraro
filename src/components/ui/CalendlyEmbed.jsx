@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { CALENDLY_URL } from '../../data/siteConfig'
-import { loadCalendlyAssets } from '../../lib/calendly'
+import { loadCalendlyAssets, withLocale, CALENDLY_LOCALE } from '../../lib/calendly'
 
 // Widget Calendly inline: mostra il calendario direttamente nella pagina.
 function CalendlyEmbed({ url = CALENDLY_URL, className = '' }) {
@@ -14,7 +14,11 @@ function CalendlyEmbed({ url = CALENDLY_URL, className = '' }) {
       if (cancelled || !container || !window.Calendly) return
       // Evita una doppia inizializzazione (es. StrictMode in sviluppo).
       if (container.childElementCount > 0) return
-      window.Calendly.initInlineWidget({ url, parentElement: container })
+      window.Calendly.initInlineWidget({
+        url: withLocale(url),
+        parentElement: container,
+        embed_locale: CALENDLY_LOCALE,
+      })
     })
 
     return () => {

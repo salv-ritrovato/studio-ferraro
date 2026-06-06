@@ -3,6 +3,16 @@
 const SCRIPT_SRC = 'https://assets.calendly.com/assets/external/widget.js'
 const CSS_HREF = 'https://assets.calendly.com/assets/external/widget.css'
 
+// Lingua forzata per gli embed Calendly.
+// NB: la lingua deve essere abilitata anche nelle impostazioni dell'account Calendly.
+export const CALENDLY_LOCALE = 'it'
+
+// Aggiunge il parametro locale all'URL (rinforzo oltre all'opzione embed_locale).
+export function withLocale(url) {
+  const separator = url.includes('?') ? '&' : '?'
+  return `${url}${separator}locale=${CALENDLY_LOCALE}`
+}
+
 let loadingPromise = null
 
 export function loadCalendlyAssets() {
@@ -40,11 +50,14 @@ export function openCalendlyPopup(url) {
   loadCalendlyAssets()
     .then(() => {
       if (window.Calendly) {
-        window.Calendly.initPopupWidget({ url })
+        window.Calendly.initPopupWidget({
+          url: withLocale(url),
+          embed_locale: CALENDLY_LOCALE,
+        })
       }
     })
     .catch(() => {
       // Fallback: se Calendly non è raggiungibile, apri il link in una nuova scheda.
-      window.open(url, '_blank', 'noopener,noreferrer')
+      window.open(withLocale(url), '_blank', 'noopener,noreferrer')
     })
 }

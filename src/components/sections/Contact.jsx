@@ -6,7 +6,7 @@ import CalendlyEmbed from '../ui/CalendlyEmbed'
 const CONTACT_INFO = [
   {
     label: 'Telefono',
-    value: '+39 02 1234 5678',
+    value: '+39 02 3331 74020',
     href: 'tel:+390212345678',
     icon: 'M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.2 2.2z',
   },
@@ -71,8 +71,7 @@ function Contact() {
   }
 
   const fieldClass = (field) =>
-    `w-full rounded-xl border bg-background px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 ${
-      errors[field] ? 'border-red-400' : 'border-slate-200'
+    `w-full rounded-xl border bg-background px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 ${errors[field] ? 'border-red-400' : 'border-slate-200'
     }`
 
   return (
