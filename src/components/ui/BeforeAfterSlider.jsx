@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-// Slider di confronto Prima/Dopo: trascinamento (mouse/touch) + tastiera (frecce).
 function BeforeAfterSlider({
   before,
   after,
@@ -48,7 +47,9 @@ function BeforeAfterSlider({
   return (
     <div
       ref={containerRef}
+      style={{ touchAction: 'none' }}
       onPointerDown={(event) => {
+        event.preventDefault()
         draggingRef.current = true
         updateFromClientX(event.clientX)
       }}
