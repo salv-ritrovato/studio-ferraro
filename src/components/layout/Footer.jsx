@@ -73,7 +73,7 @@ function Footer() {
             <li>Via Roma 42, 20121 Milano</li>
             <li>
               <a href="tel:+390212345678" className="transition-colors hover:text-accent">
-                +39 02 1234 5678
+                +39 02 3331 74020
               </a>
             </li>
             <li>

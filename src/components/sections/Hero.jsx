@@ -82,7 +82,7 @@ function Hero() {
         <div className="reveal max-w-xl">
           <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-secondary shadow-card">
             <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />
-            Nuovi pazienti benvenuti
+            Siamo pronti ad accoglierti
           </span>
 
           <h1 className="mt-6 text-5xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-7xl">
