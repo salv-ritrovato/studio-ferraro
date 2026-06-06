@@ -42,8 +42,9 @@ function Testimonials() {
     return () => clearInterval(id)
   }, [paused, maxIndex])
 
-  const goPrev = () => setIndex((current) => Math.max(0, current - 1))
-  const goNext = () => setIndex((current) => Math.min(maxIndex, current + 1))
+  // Navigazione circolare: dall'inizio torna alla fine e viceversa.
+  const goPrev = () => setIndex((current) => (current <= 0 ? maxIndex : current - 1))
+  const goNext = () => setIndex((current) => (current >= maxIndex ? 0 : current + 1))
 
   return (
     <section id="testimonials" className="bg-gradient-to-b from-background to-white py-20 lg:py-28">
@@ -91,9 +92,8 @@ function Testimonials() {
               <button
                 type="button"
                 onClick={goPrev}
-                disabled={index === 0}
                 aria-label="Recensione precedente"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-ink transition-colors hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-ink transition-colors hover:border-primary hover:text-primary"
               >
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 5l-7 7 7 7" />
@@ -118,9 +118,8 @@ function Testimonials() {
               <button
                 type="button"
                 onClick={goNext}
-                disabled={index === maxIndex}
                 aria-label="Recensione successiva"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-ink transition-colors hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-ink transition-colors hover:border-primary hover:text-primary"
               >
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 5l7 7-7 7" />
